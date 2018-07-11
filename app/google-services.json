@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1023317870960",
+    "firebase_url": "https://favoritecalculator.firebaseio.com",
+    "project_id": "favoritecalculator",
+    "storage_bucket": "favoritecalculator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023317870960:android:5cc3925508016cc3",
+        "android_client_info": {
+          "package_name": "apps.marketableskill.biz.myfavoritecalculator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023317870960-ev6dbde13lbad610coobvevcl4tm2fv9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "apps.marketableskill.biz.myfavoritecalculator",
+            "certificate_hash": "a20e0b169b044a7c3a023e997565017713025d6a"
+          }
+        },
+        {
+          "client_id": "1023317870960-49v85nlh5rfl1uv7nsubl1aff7jjqtce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxElzO_VMEKX1U4cZUJa8U6hesG00dgMk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023317870960-49v85nlh5rfl1uv7nsubl1aff7jjqtce.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
