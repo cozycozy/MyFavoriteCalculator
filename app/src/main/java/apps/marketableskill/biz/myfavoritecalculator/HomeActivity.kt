@@ -1,5 +1,6 @@
 package apps.marketableskill.biz.myfavoritecalculator
 
+import android.app.FragmentManager
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -26,6 +27,12 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        supportFragmentManager.beginTransaction()
+                .add(R.id.framelayout, CalculatorFragment.newInstance(), "CaluculatorFragment")
+                .commit()
+
+
     }
 
     override fun onBackPressed() {

@@ -22,7 +22,7 @@
         android:fitsSystemWindows="true">
 
         <include
-            layout="@layout/fragment_item"
+            layout="@layout/fragment_item_list"
             android:layout_width="match_parent"
             android:layout_height="568dp" />
     </android.support.design.widget.NavigationView>
