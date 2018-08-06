@@ -20,6 +20,9 @@ class CalculatorFragment : Fragment() {
     var symbolArrayList : ArrayList<String> = ArrayList<String>()
     var figureArrayList : ArrayList<String> = ArrayList<String>()
 
+    var storeSymbolArrayList : ArrayList<String> = ArrayList<String>()
+    var storeFigureArrayList : ArrayList<String> = ArrayList<String>()
+
     var outputFomular : String = ""
     var outputFigure : String = ""
 
@@ -42,8 +45,8 @@ class CalculatorFragment : Fragment() {
         imageView1.setOnClickListener {
             Log.v("View1:", "clicked!")
 
-            figureArrayList.add("1")
-            makeOutput("1")
+            inputFigure("1")
+            doCalculate("1")
             updateUI("1")
 
         }
@@ -51,16 +54,18 @@ class CalculatorFragment : Fragment() {
         imageView2.setOnClickListener {
             Log.v("View2:", "clicked!")
 
-            makeOutput("2")
+            inputFigure("2")
+            doCalculate("2")
             updateUI("2")
 
         }
 
         imageViewkakeru.setOnClickListener {
-            Log.v("kakeru:", "clicked!")
+            Log.v("symbolMultiply:", symbolMultiply + " clicked!")
 
-            calculateSymbol("✕")
-            updateUI("2")
+            inputSymbol(symbolMultiply)
+            doCalculate(symbolMultiply)
+            updateUI(symbolMultiply)
 
         }
 
@@ -78,119 +83,127 @@ class CalculatorFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
-    private fun calculateSymbol(symbol: String) {
+    private fun inputFigure(input: String) {
+
+        if (storeSymbolArrayList.size == 0) {
+            if (storeFigureArrayList[0] == "0" ){
+                storeFigureArrayList[0] == input
+            } else {
+                storeFigureArrayList[0] = storeFigureArrayList[0] + input
+            }
+        } else {
+            if (storeFigureArrayList.size == storeSymbolArrayList.size){
+                storeFigureArrayList.add(input)
+            } else {
+                if (storeFigureArrayList.last() == "0") {
+                    storeFigureArrayList[storeSymbolArrayList.lastIndex] = input
+                } else {
+                    storeFigureArrayList[storeSymbolArrayList.lastIndex] =
+                            storeFigureArrayList[storeSymbolArrayList.lastIndex] + input
+                }
+            }
+        }
+
+    }
+
+    private fun inputSymbol(symbol: String) {
 
 //        【演算子をタップされた場合】
 
-        val lastBoxValue = symbolArrayList[symbolArrayList.size - 1]
+        if (storeFigureArrayList.size > storeSymbolArrayList.size) {
 
-        if (checkNumeric(lastBoxValue)) {
-
-//        直近のBoxが数値の場合
-//        　→ Boxを追加し、演算子を設定、計算式を反映
-            symbolArrayList.add(symbol)
+            storeSymbolArrayList.add(symbol)
 
         } else {
-//        直近のBoxが演算子の場合
-//        　→ 直近のBoxの演算子を入力された演算子に置き換える。その後に計算式を反映
-            symbolArrayList[symbolArrayList.size - 1] = symbol
+
+            storeSymbolArrayList[storeSymbolArrayList.lastIndex] = symbol
+
         }
 
     }
 
     private fun updateUI(id: String) {
 
-        //計算式の更新
-        var fomularText = ""
+        var makefomular = ""
+        var makeResult = ""
 
-        for (value in symbolArrayList){
-            fomularText = fomularText + value
+        if (storeSymbolArrayList.size == 0) {
+            //数字1つだけの入力の場合
+
+            makefomular = storeFigureArrayList[0]
+            makeResult = storeFigureArrayList[0]
+
+        } else {
+            //数字も演算子もある場合
+
+            val count = storeFigureArrayList.size - 1
+            var diffString = ""
+
+            for (i in 0..count) {
+
+                if (storeSymbolArrayList.size == count) {
+                    diffString = ""
+                } else {
+                    diffString = storeSymbolArrayList[i]
+                }
+
+                makefomular = storeFigureArrayList[i] + diffString
+
+            }
+
+            makeResult = figureArrayList[0]
+
         }
 
-        textViewfomula.text = fomularText
-
-        textOutcome.text = fomularText
+        textViewfomula.text = makefomular
+        textOutcome.text = makeResult
 
     }
 
-    private fun makeOutput(input : String){
+    private fun doCalculate(input : String){
 
+        symbolArrayList = storeSymbolArrayList
+        figureArrayList = storeFigureArrayList
 
-        var maxSize = symbolArrayList.size - 1
+        if (figureArrayList.size <= 1) {
+            return
+        }
+
+        var maxSize = symbolArrayList.size
 
         for(i in maxSize downTo 0 step -1) {
 
-            var symbol = symbolArrayList[i]
+            var symbol = symbolArrayList[i-1]
 
             if (symbol == symbolMultiply || symbol == symbolDivide) {
 
-                val figure1 = figureArrayList[i]
-                val figure2 = figureArrayList[i + 1]
+                val figure1 = figureArrayList[i-1]
+                val figure2 = figureArrayList[i]
 
-                figureArrayList[i] = calculate(figure1,figure2,symbol)
-                figureArrayList.removeAt(i+1)
-                symbolArrayList.removeAt(i)
+                figureArrayList[i-1] = calculate(figure1,figure2,symbol)
+                figureArrayList.removeAt(i)
+                symbolArrayList.removeAt(i-1)
             }
 
         }
 
-        maxSize = symbolArrayList.size -1
+        maxSize = symbolArrayList.size
 
         for (i in maxSize downTo 0 step -1){
 
-            val figure1 = figureArrayList[i]
-            val figure2 = figureArrayList[i + 1]
-            var symbol = symbolArrayList[i]
+            val figure1 = figureArrayList[i-1]
+            val figure2 = figureArrayList[i]
+            var symbol = symbolArrayList[i-1]
 
-            figureArrayList[i] = calculate(figure1,figure2,symbol)
-            figureArrayList.removeAt(i+1)
-            symbolArrayList.removeAt(i)
-
-        }
-
-
-
-        if (symbolArrayList.size == 1){
-
-            val fomular = symbolArrayList[0]
-//        Boxが1つだったら
-            if(fomular == "0") {
-//        　→ 0の場合
-//        　　 0を消して入力された数値を設定、その後に計算結果と計算式を反映
-                symbolArrayList[0] = input
-                outputFigure = input
-            } else {
-//        　→ 0以外の場合
-//        　　 数字の後ろに入力された数値を設定、その後に計算結果と計算式を反映
-                symbolArrayList[0] = fomular + input
-                outputFigure = fomular + input
-            }
-        } else {
-//        Boxが2つ以上だったら
-            val lastBoxValue = symbolArrayList[symbolArrayList.size - 1]
-
-            if (checkNumeric(lastBoxValue)) {
-//        　→ 直近のBoxが数値だった場合
-                if (lastBoxValue == "0") {
-//        　　 → 数値が0の場合
-//        　 　　 0を消して入力された数値を設定、その後に計算結果と計算式を反映
-                    symbolArrayList[symbolArrayList.size - 1] = input
-                } else {
-//        　 　→ 0以外の場合
-//        　　 　 数字の後ろに入力された数値を設定、その後に計算結果と計算式を反映
-                    symbolArrayList[symbolArrayList.size - 1] = lastBoxValue + input
-                }
-                outputFigure = calculate()
-            } else {
-//        　→ 直近のBoxが演算子の場合
-//        　　 Boxを作り、入力された数値を設定、その後に計算結果と計算式を反映
-                symbolArrayList.add(input)
-            }
+            figureArrayList[i-1] = calculate(figure1,figure2,symbol)
+            figureArrayList.removeAt(i)
+            symbolArrayList.removeAt(i-1)
 
         }
 
 
     }
+
 
     private fun calculate(f1:String, f2:String, symbol: String): String {
 
