@@ -45,7 +45,6 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="bottom|right|center_vertical"
-                android:text="100✕10"
                 android:textSize="36sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -64,7 +63,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
             <ImageView
-                android:id="@+id/imageView10"
+                android:id="@+id/imageViewPercent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
@@ -73,7 +72,7 @@
                 android:src="@drawable/buttonpercent" />
 
             <ImageView
-                android:id="@+id/imageView11"
+                android:id="@+id/imageViewDel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -81,7 +80,7 @@
                 android:src="@drawable/buttondel" />
 
             <ImageView
-                android:id="@+id/imageView12"
+                android:id="@+id/imageViewClear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -89,7 +88,7 @@
                 android:src="@drawable/buttonc" />
 
             <ImageView
-                android:id="@+id/imageViewPlus3"
+                android:id="@+id/imageViewDivide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -133,7 +132,7 @@
                 android:src="@drawable/button9" />
 
             <ImageView
-                android:id="@+id/imageViewdivide"
+                android:id="@+id/imageViewMultiply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -178,7 +177,7 @@
                 android:src="@drawable/button6" />
 
             <ImageView
-                android:id="@+id/imageViewkakeru"
+                android:id="@+id/imageViewSubtract"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -224,7 +223,7 @@
                 android:src="@drawable/button3" />
 
             <ImageView
-                android:id="@+id/imageViewPlus2"
+                android:id="@+id/imageViewPlus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -245,7 +244,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout_3">
 
             <ImageView
-                android:id="@+id/imageViewpn"
+                android:id="@+id/imageViewPN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
@@ -262,7 +261,7 @@
                 android:src="@drawable/button0" />
 
             <ImageView
-                android:id="@+id/imageViewdotto"
+                android:id="@+id/imageViewDotto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="1dp"
@@ -270,7 +269,7 @@
                 android:src="@drawable/buttondotto" />
 
             <ImageView
-                android:id="@+id/imageViewequal"
+                android:id="@+id/imageViewEqual"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
