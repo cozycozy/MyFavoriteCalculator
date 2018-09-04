@@ -12,25 +12,22 @@ import kotlinx.android.synthetic.main.fragment_calculator.*
 
 class CalculatorFragment : Fragment() {
 
-    var pushEqual: Boolean = false
+    private var pushEqual: Boolean = false
 
-    val symbolPlus : String = "+"
-    val symbolsubtract : String = "-"
-    val symbolMultiply : String = "✕"
-    val symbolDivide : String = "÷"
-    val symbolClear : String = "C"
-    val symbolDelete : String = "<<<"
+    private val symbolPlus : String = "+"
+    private val symbolsubtract : String = "-"
+    private val symbolMultiply : String = "✕"
+    private val symbolDivide : String = "÷"
+    private val symbolDelete : String = "<<<"
+    private val symbolDotto : String = "."
 
-    var sum: Long = 0
+    private var sum: Float = 0.0f
 
-    var symbolArrayList : ArrayList<String> = ArrayList<String>()
-    var figureArrayList : ArrayList<String> = ArrayList<String>()
+    private var symbolArrayList : ArrayList<String> = ArrayList<String>()
+    private var figureArrayList : ArrayList<String> = ArrayList<String>()
 
-    var storeSymbolArrayList : ArrayList<String> = ArrayList<String>()
-    var storeFigureArrayList : ArrayList<String> = ArrayList<String>()
-
-    var outputFomular : String = ""
-    var outputFigure : String = ""
+    private var storeSymbolArrayList : ArrayList<String> = ArrayList<String>()
+    private var storeFigureArrayList : ArrayList<String> = ArrayList<String>()
 
     companion object {
         fun newInstance() = CalculatorFragment()
@@ -45,16 +42,7 @@ class CalculatorFragment : Fragment() {
 
     }
 
-    fun doSymbleOnclickListener(input: String) {
-
-//        var inputSymbol = ""
-//
-//        when(input) {
-//            symbolPlus -> inputSymbol = symbolPlus
-//            symbolsubtract -> inputSymbol = symbolsubtract
-//            symbolMultiply -> inputSymbol = symbolMultiply
-//            symbolDivide -> inputSymbol = symbolDivide
-//        }
+    private fun doSymbleOnclickListener(input: String) {
 
         Log.v("Symbol:" + input, symbolMultiply + " clicked!")
 
@@ -90,7 +78,7 @@ class CalculatorFragment : Fragment() {
 
     fun doFigureOnclickListener(input: String) {
 
-        Log.v("View" + input + ":", "clicked!")
+        Log.v("View $input:", "clicked!")
         inputFigure(input)
         doCalculate()
         updateUI()
@@ -168,7 +156,7 @@ class CalculatorFragment : Fragment() {
             textOutcome.text = "0"
 
             //各ストア情報の初期化
-            sum = 0
+            sum = 0.0f
             storeFigureArrayList = ArrayList<String>()
             storeFigureArrayList.add("0")
             storeSymbolArrayList = ArrayList<String>()
@@ -203,11 +191,30 @@ class CalculatorFragment : Fragment() {
 
         }
 
+        imageViewDotto.setOnClickListener {
+            inputDotto()
+            doCalculate()
+            updateUI()
+        }
 
         viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
+    private fun inputDotto() {
+
+        if (storeSymbolArrayList.size == 0) {
+            storeFigureArrayList[0] = storeFigureArrayList[0] + symbolDotto
+            return
+        }
+
+        if (storeFigureArrayList.size == storeSymbolArrayList.size){
+            storeFigureArrayList.add("0$symbolDotto")
+        } else {
+            storeFigureArrayList[storeFigureArrayList.lastIndex] += symbolDotto
+        }
+
+    }
 
     private fun inputFigure(input: String) {
 
@@ -300,7 +307,7 @@ class CalculatorFragment : Fragment() {
         figureArrayList = ArrayList<String>(storeFigureArrayList)
 
         if (figureArrayList.size <= 1) {
-            sum = figureArrayList[0].toLong()
+            sum = figureArrayList[0].toFloat()
             return
         }
 
@@ -308,14 +315,14 @@ class CalculatorFragment : Fragment() {
 
         for(i in maxSize downTo 1) {
 
-            var symbol = symbolArrayList[i-1]
+            val symbol = symbolArrayList[i-1]
 
             if (symbol == symbolMultiply || symbol == symbolDivide) {
 
                 val figure1 = figureArrayList[i-1]
                 val figure2 = figureArrayList[i]
 
-                figureArrayList[i-1] = calculate(figure1.toLong(),figure2.toLong(),symbol).toString()
+                figureArrayList[i-1] = calculate(figure1.toFloat(),figure2.toFloat(),symbol).toString()
                 figureArrayList.removeAt(i)
                 symbolArrayList.removeAt(i-1)
             }
@@ -326,24 +333,24 @@ class CalculatorFragment : Fragment() {
 
         if (maxSize <= 1) {
             //計算する必要がないケースのため、合計値に数値を入れて戻る
-            sum = figureArrayList[0].toLong()
+            sum = figureArrayList[0].toFloat()
             return
         }
 
-        sum = figureArrayList[0].toLong()
+        sum = figureArrayList[0].toFloat()
 
         for (i in 1..maxSize - 1){
             val figure1 = figureArrayList[i]
-            var symbol = symbolArrayList[i - 1]
+            val symbol = symbolArrayList[i - 1]
 
-            sum = calculate(sum,figure1.toLong(),symbol)
+            sum = calculate(sum,figure1.toFloat(),symbol)
         }
     }
 
 
-    private fun calculate(f1:Long, f2:Long, symbol: String): Long {
+    private fun calculate(f1:Float, f2:Float, symbol: String): Float {
 
-        var output : Long = 0
+        var output : Float = 0.0f
 
         if (symbol == symbolPlus){
             output = f1 + f2
@@ -363,12 +370,6 @@ class CalculatorFragment : Fragment() {
 
         return output
 
-    }
-
-    private fun checkNumeric(number: String): Boolean{
-        val pattern = java.util.regex.Pattern.compile("^[0-9]*$")
-        val matcher = pattern.matcher(number)
-        return matcher.matches()
     }
 
 }
