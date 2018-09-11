@@ -20,8 +20,9 @@ class CalculatorFragment : Fragment() {
     private val symbolDivide : String = "÷"
     private val symbolDelete : String = "<<<"
     private val symbolDotto : String = "."
+    private val symbolPercent : String = "%"
 
-    private var sum: Float = 0.0f
+    private var sum: Float = 0f
 
     private var symbolArrayList : ArrayList<String> = ArrayList<String>()
     private var figureArrayList : ArrayList<String> = ArrayList<String>()
@@ -39,49 +40,6 @@ class CalculatorFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.fragment_calculator, container, false)
-
-    }
-
-    private fun doSymbleOnclickListener(input: String) {
-
-        Log.v("Symbol:" + input, symbolMultiply + " clicked!")
-
-        if (input == symbolDelete) {
-
-            if (storeSymbolArrayList.size == 0) {
-                if (storeFigureArrayList[storeFigureArrayList.lastIndex].length <= 1) {
-                    storeFigureArrayList[storeFigureArrayList.lastIndex] = "0"
-                } else {
-                    storeFigureArrayList[storeFigureArrayList.lastIndex]=
-                            storeFigureArrayList[storeFigureArrayList.lastIndex].dropLast(1)
-                }
-            } else {
-                if (storeFigureArrayList.size == storeSymbolArrayList.size) {
-                    storeSymbolArrayList.removeAt(storeSymbolArrayList.lastIndex)
-                } else {
-                    if (storeFigureArrayList[storeFigureArrayList.lastIndex].length <= 1) {
-                        storeFigureArrayList.removeAt(storeFigureArrayList.lastIndex)
-                    } else {
-                        storeFigureArrayList[storeFigureArrayList.lastIndex]=
-                                storeFigureArrayList[storeFigureArrayList.lastIndex].dropLast(1)
-                    }
-                }
-            }
-
-        } else {
-            inputSymbol(input)
-        }
-        doCalculate()
-        updateUI()
-
-    }
-
-    fun doFigureOnclickListener(input: String) {
-
-        Log.v("View $input:", "clicked!")
-        inputFigure(input)
-        doCalculate()
-        updateUI()
 
     }
 
@@ -156,7 +114,7 @@ class CalculatorFragment : Fragment() {
             textOutcome.text = "0"
 
             //各ストア情報の初期化
-            sum = 0.0f
+            sum = 0f
             storeFigureArrayList = ArrayList<String>()
             storeFigureArrayList.add("0")
             storeSymbolArrayList = ArrayList<String>()
@@ -185,6 +143,10 @@ class CalculatorFragment : Fragment() {
 
         imageViewPercent.setOnClickListener {
 
+            inputPercent()
+            doCalculate()
+            updateUI()
+
         }
 
         imageViewPN.setOnClickListener {
@@ -201,6 +163,49 @@ class CalculatorFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
+    private fun doSymbleOnclickListener(input: String) {
+
+        Log.v("Symbol:" + input, symbolMultiply + " clicked!")
+
+        if (input == symbolDelete) {
+
+            if (storeSymbolArrayList.size == 0) {
+                if (storeFigureArrayList[storeFigureArrayList.lastIndex].length <= 1) {
+                    storeFigureArrayList[storeFigureArrayList.lastIndex] = "0"
+                } else {
+                    storeFigureArrayList[storeFigureArrayList.lastIndex]=
+                            storeFigureArrayList[storeFigureArrayList.lastIndex].dropLast(1)
+                }
+            } else {
+                if (storeFigureArrayList.size == storeSymbolArrayList.size) {
+                    storeSymbolArrayList.removeAt(storeSymbolArrayList.lastIndex)
+                } else {
+                    if (storeFigureArrayList[storeFigureArrayList.lastIndex].length <= 1) {
+                        storeFigureArrayList.removeAt(storeFigureArrayList.lastIndex)
+                    } else {
+                        storeFigureArrayList[storeFigureArrayList.lastIndex]=
+                                storeFigureArrayList[storeFigureArrayList.lastIndex].dropLast(1)
+                    }
+                }
+            }
+
+        } else {
+            inputSymbol(input)
+        }
+        doCalculate()
+        updateUI()
+
+    }
+
+    fun doFigureOnclickListener(input: String) {
+
+        Log.v("View $input:", "clicked!")
+        inputFigure(input)
+        doCalculate()
+        updateUI()
+
+    }
+
     private fun inputDotto() {
 
         if (storeSymbolArrayList.size == 0) {
@@ -212,6 +217,19 @@ class CalculatorFragment : Fragment() {
             storeFigureArrayList.add("0$symbolDotto")
         } else {
             storeFigureArrayList[storeFigureArrayList.lastIndex] += symbolDotto
+        }
+
+    }
+
+    private fun inputPercent() {
+
+        if (storeSymbolArrayList.size == 0) {
+            storeFigureArrayList[0] = storeFigureArrayList[0] + symbolPercent
+            return
+        }
+
+        if (storeFigureArrayList.size != storeSymbolArrayList.size){
+            storeFigureArrayList[storeFigureArrayList.lastIndex] += symbolPercent
         }
 
     }
@@ -297,8 +315,27 @@ class CalculatorFragment : Fragment() {
         }
 
         textViewfomula.text = makefomular
+
+        if(makeResult.contains(".0")) {
+            textOutcome.text = makeResult.replace(".0","")
+            return
+        }
         textOutcome.text = makeResult
 
+    }
+
+    private fun exchangeFloat(txt : String) : Float {
+
+        var exchange = 0F
+
+        if ( txt.contains("%")) {
+            var removePercent = txt.replace(symbolPercent,"")
+            exchange = removePercent.toFloat() / 100
+        } else {
+            exchange = txt.toFloat()
+        }
+
+        return exchange
     }
 
     private fun doCalculate(){
@@ -307,7 +344,7 @@ class CalculatorFragment : Fragment() {
         figureArrayList = ArrayList<String>(storeFigureArrayList)
 
         if (figureArrayList.size <= 1) {
-            sum = figureArrayList[0].toFloat()
+            sum = exchangeFloat(figureArrayList[0])
             return
         }
 
@@ -322,7 +359,7 @@ class CalculatorFragment : Fragment() {
                 val figure1 = figureArrayList[i-1]
                 val figure2 = figureArrayList[i]
 
-                figureArrayList[i-1] = calculate(figure1.toFloat(),figure2.toFloat(),symbol).toString()
+                figureArrayList[i-1] = calculate(exchangeFloat(figure1),exchangeFloat(figure2),symbol).toString()
                 figureArrayList.removeAt(i)
                 symbolArrayList.removeAt(i-1)
             }
@@ -333,24 +370,24 @@ class CalculatorFragment : Fragment() {
 
         if (maxSize <= 1) {
             //計算する必要がないケースのため、合計値に数値を入れて戻る
-            sum = figureArrayList[0].toFloat()
+            sum = exchangeFloat(figureArrayList[0])
             return
         }
 
-        sum = figureArrayList[0].toFloat()
+        sum = exchangeFloat(figureArrayList[0])
 
         for (i in 1..maxSize - 1){
             val figure1 = figureArrayList[i]
             val symbol = symbolArrayList[i - 1]
 
-            sum = calculate(sum,figure1.toFloat(),symbol)
+            sum = calculate(sum,exchangeFloat(figure1),symbol)
         }
     }
 
 
     private fun calculate(f1:Float, f2:Float, symbol: String): Float {
 
-        var output : Float = 0.0f
+        var output : Float = 0F
 
         if (symbol == symbolPlus){
             output = f1 + f2
