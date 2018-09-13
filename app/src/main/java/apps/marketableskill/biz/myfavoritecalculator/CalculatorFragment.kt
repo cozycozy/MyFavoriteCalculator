@@ -151,6 +151,10 @@ class CalculatorFragment : Fragment() {
 
         imageViewPN.setOnClickListener {
 
+            inputPN()
+            doCalculate()
+            updateUI()
+
         }
 
         imageViewDotto.setOnClickListener {
@@ -203,6 +207,31 @@ class CalculatorFragment : Fragment() {
         inputFigure(input)
         doCalculate()
         updateUI()
+
+    }
+
+    private fun inputPN() {
+
+        if (storeSymbolArrayList.size == 0) {
+            val figure = storeFigureArrayList[0]
+            if (figure.contains(symbolsubtract)){
+                storeFigureArrayList[0] = figure.replace(symbolsubtract,"")
+            } else {
+                storeFigureArrayList[0] = symbolsubtract + figure
+            }
+            return
+        }
+
+        if (storeFigureArrayList.size == storeSymbolArrayList.size){
+            storeFigureArrayList.add(symbolsubtract)
+        } else {
+            val figure = storeFigureArrayList[storeFigureArrayList.lastIndex]
+            if (figure.contains(symbolsubtract)){
+                storeFigureArrayList[storeFigureArrayList.lastIndex] = figure.replace(symbolsubtract,"")
+            } else {
+                storeFigureArrayList[storeFigureArrayList.lastIndex] = symbolsubtract + figure
+            }
+        }
 
     }
 

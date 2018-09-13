@@ -11,272 +11,299 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <TextView
+            android:id="@+id/textOutcome"
+            android:layout_width="370dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="bottom|right"
+            android:text="0"
+            android:textSize="48sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.68"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewfomula"
+            android:layout_width="370dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="24dp"
+            android:gravity="bottom|right|center_vertical"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="@+id/textOutcome"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textOutcome"
+            app:layout_constraintTop_toBottomOf="@+id/textOutcome" />
+
+        <ImageView
+            android:id="@+id/imageViewPercent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:layout_marginTop="24dp"
+            android:layout_weight="1"
+            android:baselineAlignBottom="true"
+            android:padding="0dp"
+            android:src="@drawable/buttonpercent"
+            app:layout_constraintBottom_toTopOf="@+id/imageView7"
+            app:layout_constraintDimensionRatio=""
+            app:layout_constraintEnd_toStartOf="@+id/imageViewDel"
+            app:layout_constraintHorizontal_bias="0.72"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewfomula"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_weight="1" />
+
+        <ImageView
+            android:id="@+id/imageViewDel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout_5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_chainStyle="spread_inside">
+            android:layout_weight="1"
+            android:src="@drawable/buttondel"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewClear"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/imageViewPercent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewfomula" />
 
-            <TextView
-                android:id="@+id/textOutcome"
-                android:layout_width="370dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:gravity="bottom|right"
-                android:text="0"
-                android:textSize="48sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textViewfomula"
-                android:layout_width="370dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:gravity="bottom|right|center_vertical"
-                android:textSize="36sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout_5"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imageViewClear"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+            android:layout_weight="1"
+            android:src="@drawable/buttonc"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewDivide"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/imageViewDel"
+            app:layout_constraintTop_toBottomOf="@+id/textViewfomula" />
 
-            <ImageView
-                android:id="@+id/imageViewPercent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:src="@drawable/buttonpercent" />
-
-            <ImageView
-                android:id="@+id/imageViewDel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="1dp"
-                android:src="@drawable/buttondel" />
-
-            <ImageView
-                android:id="@+id/imageViewClear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="1dp"
-                android:src="@drawable/buttonc" />
-
-            <ImageView
-                android:id="@+id/imageViewDivide"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="1dp"
-                android:src="@drawable/buttondivide" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout_1"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imageViewDivide"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:src="@drawable/buttondivide"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout_5">
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/imageViewClear"
+            tools:layout_editor_absoluteY="218dp" />
 
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:src="@drawable/button7" />
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:src="@drawable/button7"
+            app:layout_constraintBottom_toTopOf="@+id/imageView4"
+            app:layout_constraintEnd_toStartOf="@+id/imageView8"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/imageViewPercent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewPercent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_weight="1" />
 
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="1dp"
-                android:src="@drawable/button8" />
-
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="1dp"
-                android:src="@drawable/button9" />
-
-            <ImageView
-                android:id="@+id/imageViewMultiply"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="1dp"
-                android:src="@drawable/buttonkakeru" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout_2"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout_1">
+            android:layout_weight="1"
+            android:paddingLeft="1dp"
+            android:src="@drawable/button8"
+            app:layout_constraintEnd_toStartOf="@+id/imageView9"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView7"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewDel" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:src="@drawable/button4" />
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="1dp"
-                android:layout_weight="1"
-                android:src="@drawable/button5" />
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="1dp"
-                android:layout_weight="1"
-                android:src="@drawable/button6" />
-
-            <ImageView
-                android:id="@+id/imageViewSubtract"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="1dp"
-                android:src="@drawable/buttonmainasu" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout_3"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imageViewMultiply"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-
+            android:layout_weight="1"
+            android:paddingLeft="1dp"
+            android:src="@drawable/buttonkakeru"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout_2">
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView9"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewDivide" />
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:src="@drawable/button1" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="1dp"
-                android:layout_weight="1"
-                android:src="@drawable/button2" />
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="1dp"
-                android:layout_weight="1"
-                android:src="@drawable/button3" />
-
-            <ImageView
-                android:id="@+id/imageViewPlus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="1dp"
-                android:src="@drawable/buttonplus" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout_4"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:paddingLeft="1dp"
+            android:src="@drawable/button9"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewMultiply"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView8"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewClear" />
+
+        <ImageView
+            android:id="@+id/imageViewSubtract"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="1dp"
+            android:src="@drawable/buttonmainasu"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView6"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewMultiply" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="1dp"
+            android:src="@drawable/button5"
+            app:layout_constraintEnd_toStartOf="@+id/imageView6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:src="@drawable/button4"
+            app:layout_constraintBottom_toTopOf="@+id/imageView1"
+            app:layout_constraintEnd_toStartOf="@+id/imageView5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/imageView7"
+            app:layout_constraintTop_toBottomOf="@+id/imageView7"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_weight="1" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="1dp"
+            android:src="@drawable/button6"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewSubtract"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/button2"
+            app:layout_constraintEnd_toStartOf="@+id/imageView3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView1"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:src="@drawable/button1"
+            app:layout_constraintBottom_toTopOf="@+id/imageViewPN"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout_3">
+            app:layout_constraintTop_toBottomOf="@+id/imageView4"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_weight="1" />
 
-            <ImageView
-                android:id="@+id/imageViewPN"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:src="@drawable/buttonpn" />
+        <ImageView
+            android:id="@+id/imageViewPlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="1dp"
+            android:src="@drawable/buttonplus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewSubtract" />
 
-            <ImageView
-                android:id="@+id/imageView0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="1dp"
-                android:layout_weight="1"
-                android:src="@drawable/button0" />
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="1dp"
+            android:src="@drawable/button3"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewPlus"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
-            <ImageView
-                android:id="@+id/imageViewDotto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="1dp"
-                android:layout_weight="1"
-                android:src="@drawable/buttondotto" />
+        <ImageView
+            android:id="@+id/imageViewEqual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="1dp"
+            android:src="@drawable/buttonequal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageViewDotto"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewPlus" />
 
-            <ImageView
-                android:id="@+id/imageViewEqual"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="1dp"
-                android:src="@drawable/buttonequal" />
+        <ImageView
+            android:id="@+id/imageView0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="1dp"
+            android:src="@drawable/button0"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewDotto"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageViewPN"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/imageViewDotto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="1dp"
+            android:src="@drawable/buttondotto"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewEqual"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView0"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <ImageView
+            android:id="@+id/imageViewPN"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:src="@drawable/buttonpn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView0"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView1"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_weight="1" />
 
     </android.support.constraint.ConstraintLayout>
 
